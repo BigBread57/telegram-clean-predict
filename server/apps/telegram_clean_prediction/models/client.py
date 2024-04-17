@@ -4,13 +4,12 @@ from django.utils.translation import gettext_lazy as _
 
 from server.apps.services.base_model import AbstractModel
 from server.apps.telegram_clean_prediction.services.enum import (
-    ClientActivity,
     ClientPrivileges,
 )
 
 
 class Client(AbstractModel):
-    """Клиент бота."""
+    """Клиент."""
 
     tg_user_id = models.BigIntegerField(
         verbose_name=_('Id пользователя в telegram'),
@@ -39,11 +38,6 @@ class Client(AbstractModel):
         verbose_name=_('Язык пользователя'),
         blank=True,
     )
-    activity = models.CharField(
-        verbose_name=_('Активность'),
-        choices=ClientActivity.choices,
-        default=ClientActivity.INACTIVE,
-    )
     privileges = models.CharField(
         verbose_name=_('Привилегии'),
         choices=ClientPrivileges.choices,
@@ -51,8 +45,8 @@ class Client(AbstractModel):
     )
 
     class Meta(AbstractModel.Meta):
-        verbose_name = _('Клиент бота')
-        verbose_name_plural = _('Клиенты бота')
+        verbose_name = _('Клиент')
+        verbose_name_plural = _('Клиенты')
 
     def __str__(self):
         return 'Id: {id}. Username: {username}. Имя: {first_name}'.format(

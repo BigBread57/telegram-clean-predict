@@ -13,7 +13,7 @@ async def get_client(tg_user_id: int) -> Client:
     ).aget(tg_user_id=tg_user_id)
 
 
-async def update_or_create_client(tg_user: User) -> int:
+async def update_or_create_client(tg_user: User) -> Client:
     """Создание или обновление пользователя."""
     client, _ = await Client.objects.aupdate_or_create(
         tg_user_id=tg_user.id,
@@ -31,4 +31,4 @@ async def update_or_create_client(tg_user: User) -> int:
         }
     )
 
-    return client.id
+    return client

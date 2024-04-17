@@ -6,10 +6,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from django.core.management.base import BaseCommand
 
 from server.apps.aiogram_bot.bot import aiogram_bot
-from server.apps.aiogram_bot.handlers import (
-    bot_start,
-    layout,
-)
+from server.apps.aiogram_bot.handlers import bot_start, layout
 # from server.apps.aiogram_bot.handlers.pay import (
 #     replenish_wallet,
 #     replenishment_methods,
@@ -28,8 +25,8 @@ async def on_startup():
     )
 
     dp = Dispatcher(storage=MemoryStorage())
-    # dp.callback_query.middleware(CheckPrivilegesMiddleware())
-    # dp.message.middleware(CheckPrivilegesMiddleware())
+    dp.callback_query.middleware(CheckPrivilegesMiddleware())
+    dp.message.middleware(CheckPrivilegesMiddleware())
     dp.include_router(bot_start.router)
     dp.include_router(layout.router)
     # dp.include_router(replenish_wallet.router)
